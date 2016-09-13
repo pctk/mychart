@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#fff"
+        >
+    <TextView android:id="@+id/tjhytex1"
+              android:layout_width="wrap_content"
+              android:layout_height="40dp"
+              android:textColor="#ffc2c2c2"
+              android:textStyle="bold"
+              android:textSize="18dp"
+              android:layout_weight="1"
+              android:paddingLeft="10dp"
+              android:gravity="center_vertical"
+                android:layout_gravity="center"
+              android:text=""
+            />
+    <Button
+            android:id="@+id/tongyi"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@null"
+            android:text="同意"
+            android:textSize="23sp"
+            android:textColor="#ff11caff"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+    <Button
+            android:id="@+id/jujue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="拒绝"
+            android:textSize="23sp"
+            android:textColor="#ffa91813"
+            android:layout_gravity="center"
+
+            />
+
+</LinearLayout>
