@@ -31,6 +31,7 @@ public class LuoJiChuLi {
             String da[] = data.split("╬");
             for (String ls : da) {
                 new SendDemo().sendData(new SqlBuild().selectIpData(id), ls);
+                System.out.println("lsss");
             }
             if (da.length > 0)
                 new SqlBuild().deleteLsData(id);
@@ -38,26 +39,31 @@ public class LuoJiChuLi {
     }
 
     public void dengLu(String ip,String data){
+        int a = 0;
         String[] da = data.split("╬");
         String send = "";
         if(new SqlBuild().dengLuPanDuan(da[1],da[2]).equals("cg")){
             send = "dl╬cg╬"+da[1];
             new SqlBuild().updataData(da[1],ip,1);
             new SendDemo().sendData(ip,send);
+            System.out.println("cg");
+            a = 1;
             sendLsDa(da[1]);
         }
         if(new SqlBuild().dengLuPanDuan(da[1],da[2]).equals("xx")){
             send = "dl╬cg╬"+da[1];
             if(!ip.equals(new SqlBuild().selectIpData(da[1]))){
                 new SendDemo().sendData(new SqlBuild().selectIpData(da[1]),"dl╬xx╬"+da[1]);
+                }
+
+            }
+            if(a == 0){
 
                 System.out.println("xx");
-            }
+                new SqlBuild().updataData(da[1],ip,1);
+                new SendDemo().sendData(ip,send);
+                sendLsDa(da[1]);
 
-
-            new SqlBuild().updataData(da[1],ip,1);
-            new SendDemo().sendData(ip,send);
-            sendLsDa(da[1]);
         }
         if(new SqlBuild().dengLuPanDuan(da[1],da[2]).equals("cw")){
             send = "dl╬cw╬"+da[1];
@@ -65,7 +71,7 @@ public class LuoJiChuLi {
         }
 //        new SendDemo().sendData(new SqlBuild().selectIpData(da[1]),send);
 
-        System.out.println(send);
+//        System.out.println(send);
     }
 
     public void tianJia(String data){

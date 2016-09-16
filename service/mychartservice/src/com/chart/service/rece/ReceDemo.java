@@ -24,16 +24,16 @@ public class ReceDemo {
 		 * 5，关闭资源
 		 */
 
-        //1,建立udp socket服务。
-        DatagramSocket ds = null;
-        try {
-            ds = new DatagramSocket(9999);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
+
 
         while(true){
-
+//1,建立udp socket服务。
+            DatagramSocket ds = null;
+            try {
+                ds = new DatagramSocket(9999);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
             //2,创建数据包。
             byte[] buf = new byte[1024];
             DatagramPacket dp = new DatagramPacket(buf,buf.length);
@@ -92,51 +92,8 @@ public class ReceDemo {
                         break;
                 }
             }
-
-//            switch (data.length){
-//                case 1:break;
-//                case 2:
-//                    if(data[0].equals("cf1")){
-////                        if(new SqlBuild().chongfupanduan(data[1])){
-////                            System.out.println("yes"+data[1]);
-////                            new SendDemo().sendDenglu(2,1,ip);
-////                        }else {
-////                            System.out.println("no");
-////                            new SendDemo().sendDenglu(2,2,ip);
-////                        }
-//                    }
-//                    break;
-//                case 3:
-//                    if(data[0].equals("dl1")){
-////                        if(new SqlBuild().dengLuPanDuan(data[1],data[2])){
-////                            System.out.println("yes"+data[1]+"..."+data[2]);
-//////                            new SqlBuild().updataip(data[1],ip);
-////                            new SendDemo().sendDenglu(1,1,ip);
-////                        }else {
-////                            System.out.println("no");
-////                            new SendDemo().sendDenglu(1,2,ip);
-////                        }
-//                    }
-//                    if(data[0].equals("cf1")){
-////                        new SqlBuild().insertData(data[1],data[2],ip);
-////                        if(new SqlBuild().dengLuPanDuan(data[1],data[2])){
-//                            System.out.println("yes"+data[1]+"...");
-////                            new SqlBuild().updataip(data[1],ip);
-////                            new SendDemo().sendDenglu(1,1,ip);
-////                        }else {
-////                            System.out.println("no");
-////                            new SendDemo().sendDenglu(1,2,ip);
-////                        }
-//                    }
-//                    break;
-//                case 4:break;
-//                case 5:break;
-//                case 6:break;
-//                case 7:break;
-//            }
-
             System.out.println(ip+":"+port+":"+text);
-
+            ds.close();
         }
         //5,关闭资源。
 //		ds.close();

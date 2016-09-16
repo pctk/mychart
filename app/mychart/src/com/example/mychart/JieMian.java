@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import cn.chart.manager.HaoYou;
-import cn.chart.manager.ReceServ;
+//import cn.chart.manager.ReceServ;
 import cn.chart.manager.SqlAllChuLi;
 import cn.chart.manager.sendrec;
 
@@ -39,6 +39,8 @@ View view456;
     protected void onDestroy() {
         new sendrec().send("xx╬"+zh);
         super.onDestroy();
+        Intent stop = new Intent(JieMian.this,MyService.class);
+        stopService(stop);
 Log.i(".....Jiemian"," xianx");
 
     }
@@ -124,17 +126,25 @@ Log.i(".....Jiemian"," xianx");
 
     }
 
-    //跳转至本页面
-    public static void actionStart(Context context){
-        Intent it = new Intent(context,JieMian.class);
-        context.startActivity(it);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("............","start");
     }
+
+    //跳转至本页面
+//    public static void actionStart(Context context){
+//        Intent it = new Intent(context,JieMian.class);
+//        context.startActivity(it);
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jiemian);
         Intent it = getIntent();
         zh = it.getStringExtra("zh");
+Log.i("jiemian run","......");
+
 
 
 //        new Thread(new Runnable() {
@@ -147,13 +157,26 @@ Log.i(".....Jiemian"," xianx");
 //        new SqlAllChuLi().deleteLbData(zh + "╬我的好友");
 //        new SqlAllChuLi().deleteLbData(zh + "╬ ");
 //        new ReceServ().rec();
+
+
         new sendrec().send("sx╬" + zh);
-        new ReceServ().rec();
+        liebiao = new ArrayList<String>();
+        haoyou = new ArrayList<List<HaoYou>>();
+
+
+//        new SqlAllChuLi(zh).selectLbData(liebiao);
+//        Log.i("......jiemian...",".size.."+liebiao.size());
+//        Log.i("......jiemian...",".first.."+liebiao.get(0));
+
+        xiaoxilis = new ArrayList<HaoYou>();
+
+//        new ReceServ().rec();
         Log.i("........jimeian...sx...","dsadfsdf");
 
 //        for(int i = 0;i <1000000;i++);
         MyWdXxLstViewAdapter myWdXxLstViewAdapter = new MyWdXxLstViewAdapter();
         MyXoapxAdapter myXoapxAdapter = new MyXoapxAdapter();
+        MyHyAdapter myHyAdapter = new MyHyAdapter();
         edxx = new ArrayList<String>();
 
 
@@ -188,7 +211,11 @@ Log.i(".....Jiemian"," xianx");
                         Toast.makeText(JieMian.this,"成功",Toast.LENGTH_LONG).show();
                         break;
                     case 5:
-                        Toast.makeText(JieMian.this,"成功",Toast.LENGTH_LONG).show();
+                        addHaoyou();
+                        myHyAdapter.notifyDataSetChanged();
+                        Log.i("...................", "" + getClass());
+                        Log.i("................size...", "" + haoyou.get(0).get(0).getId());
+//                        Toast.makeText(JieMian.this,"成功",Toast.LENGTH_LONG).show();
                         break;
                     case 6:
                         Toast.makeText(JieMian.this,"成功",Toast.LENGTH_LONG).show();
@@ -204,16 +231,8 @@ Log.i(".....Jiemian"," xianx");
         };
 
 
-        liebiao = new ArrayList<String>();
-        haoyou = new ArrayList<List<HaoYou>>();
 
 
-//        new SqlAllChuLi(zh).selectLbData(liebiao);
-//        Log.i("......jiemian...",".size.."+liebiao.size());
-//        Log.i("......jiemian...",".first.."+liebiao.get(0));
-
-        xiaoxilis = new ArrayList<HaoYou>();
-        addHaoyou();
 
 //        addXiaoXi();
 
@@ -266,7 +285,7 @@ Log.i(".....Jiemian"," xianx");
         LinearLayout liaotzw = (LinearLayout) findViewById(R.id.liaotian);
         ExpandableListView exlis = (ExpandableListView) findViewById(R.id.liebiao);
         exlis.setGroupIndicator(null);
-        exlis.setAdapter(new MyHyAdapter());
+        exlis.setAdapter(myHyAdapter);
         exlis.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
@@ -303,7 +322,8 @@ Log.i(".....Jiemian"," xianx");
                         jilu.add("︽"+nw.getText().toString());
                         myXoapxAdapter.notifyDataSetChanged();
                         new sendrec().send("lt╬"+zh+"╬"+hys.getId()+"╬"+nw.getText().toString());
-                        new ReceServ().rec();
+                        nw.setText("");
+//                        new ReceServ().rec();
                     }
                 });
 
@@ -336,6 +356,7 @@ Log.i(".....Jiemian"," xianx");
                             @Override
                             public void onClick(View view) {
                                 new sendrec().send("tj╬"+zh+"╬"+hm.getText().toString()+"╬awsw");
+
 
                             }
                         });

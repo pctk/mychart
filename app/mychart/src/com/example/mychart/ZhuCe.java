@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import cn.chart.manager.ReceServ;
+//import cn.chart.manager.ReceServ;
 import cn.chart.manager.sendrec;
 
 /**
@@ -22,7 +22,7 @@ public class ZhuCe extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zhuce);
-        new ReceServ().rec();
+//        new ReceServ().rec();
 
         Button zhuce1 = (Button) findViewById(R.id.zhueceanniu);
         EditText edinum = (EditText) findViewById(R.id.zhuecenum);
@@ -66,5 +66,12 @@ public class ZhuCe extends Activity{
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent stop = new Intent(ZhuCe.this,MyService.class);
+        stopService(stop);
     }
 }

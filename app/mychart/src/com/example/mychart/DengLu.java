@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import cn.chart.manager.ReceServ;
+//import cn.chart.manager.ReceServ;
 import cn.chart.manager.SqlAllChuLi;
 import cn.chart.manager.sendrec;
 
@@ -22,28 +22,24 @@ import java.net.UnknownHostException;
  * Created by ����� on 2016/8/20.
  */
 public class DengLu extends Activity{
+    static int aaa = 1;
+
+    static int bbb = 1;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent stop = new Intent(DengLu.this,MyService.class);
+        stopService(stop);
+    }
+
     public static Handler handler;
     String numb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.denglu);
-
-//        new SqlAllChuLi("mychart").deleDatabase("cs123");
-//        new SqlAllChuLi("mychart").deleDatabase("c123");
-//        new SqlAllChuLi("mychart").deleDatabase("cs123456");
-//        new SqlAllChuLi("mychart").deleDatabase("csnull");
-//        new SqlAllChuLi("mychart").deleDatabase("mycharts");
-//        new SqlAllChuLi("mychart").deleDatabase("mychartsq");
-
-//
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                new ReceServ().rec();
-//            }
-//        }).start();
+        Intent startService = new Intent(DengLu.this,MyService.class);
+        startService(startService);
 
         handler = new Handler() {
             @Override
@@ -51,6 +47,8 @@ public class DengLu extends Activity{
                 super.handleMessage(msg);
                 switch (msg.what){
                     case 11:
+
+                        Log.i("......tiaozhuan....",""+aaa++);
                     Intent it = new Intent(DengLu.this,JieMian.class);
                         it.putExtra("zh",numb);
                         startActivity(it);
@@ -81,11 +79,12 @@ public class DengLu extends Activity{
         denglu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("......dl...",""+bbb);
                 numb = num.getText().toString();
                 String pass = password.getText().toString();
                 String data = "dl╬"+numb+"╬"+pass;
                 new sendrec().send(data);
-                new ReceServ().rec();
+//                new ReceServ().rec();
             }
         });
 

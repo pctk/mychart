@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="mysql-connect">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../chart/service/mysql-connect.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../mysql-connect.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

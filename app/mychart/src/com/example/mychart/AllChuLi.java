@@ -49,6 +49,9 @@ public class AllChuLi {
             DengLu.handler.sendMessage(msg);
             Log.i("..................", ".......no");
         }
+        if(da[1].equals("xx")){
+            Log.i("..................", ".......xx");
+        }
     }
 
     public void tianJia(String data){
@@ -122,5 +125,8 @@ public class AllChuLi {
         new SqlAllChuLi(da[4]).insertData(da[1]);
         new SqlAllChuLi(da[4]).insertLbData(da[3]);
         new SqlAllChuLi(da[4]).insertZlData(da[2]);
+        Message msg = new Message();
+        msg.what = 5;
+        JieMian.handler.sendMessage(msg);
     }
 }

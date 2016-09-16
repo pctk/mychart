@@ -61,7 +61,7 @@ public class SendDemo {
         build();
         //使用DatagramPacket将数据封装到的该对象包中。
         byte[] buf = data.getBytes();
-
+        System.out.println("send......"+data);
         try {
             DatagramPacket dp =
                     new DatagramPacket(buf,buf.length, InetAddress.getByName(ip),10005);
